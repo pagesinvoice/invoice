@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thermal POS Receipt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      #thermal-pos {
+        box-shadow: 0 0 0 #eee;
+        margin: 0;
+        max-width: 80mm;
+        line-height: 4mm;
+      }
+      #thermal-pos h2 {
+        font-size: 4mm;
+        line-height: 13px;
+      }
+      #thermal-pos .label {
+        text-align: center;
+        font-size: 5mm;
+        line-height: 1.3;
+      }
+      #thermal-pos .informasi {
+        vertical-align: text-top;
+        text-align: left;
+        max-width: 45mm;
+        word-wrap: break-word;
+      }
+      #thermal-pos .listitem {
+        font-size: 4mm;
+        height: 0;
+        text-align: center;
+      }
+      #thermal-pos table {
+        width: 100%;
+      }
+      #thermal-pos .item {
+        max-width: 80mm;
+        font-size: 4.2mm;
+        word-wrap: break-word;
+        width: 100%;
+      }
+      #thermal-pos .amount,
+      #thermal-pos .price,
+      #thermal-pos .desc,
+      #thermal-pos .qty,
+      #thermal-pos .Isv {
+        vertical-align: center;
+        text-align: center;
+        font-size: 4.2mm;
+      }
+      #thermal-pos .Isv,
+      #thermal-pos .amount {
+        text-align: right;
+      }
+      #thermal-pos .bawah {
+        margin-top: 5mm;
+        text-align: center;
+        height: 90px;
+        page-break-after: auto;
+      }
+      #thermal-pos .detail1 {
+        margin-top: 5mm;
+        text-align: right;
+        page-break-after: auto;
+      }
+      #thermal-pos .detail {
+        margin-top: 5mm;
+        text-align: left;
+        page-break-after: auto;
+      }
+      .mi-imagen {
+        width: 150px;
+        height: 150px;
+      }
+      .divider {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="thermal-pos">
+      <div class="label">
+        <img src="logo.jpg" alt="Mi imagen" class="mi-imagen" /><br />
+        <b id="empresa"></b><br />
+        <b id="razon"></b>
+        <div class="label">
+          <b>RTN: <span id="rtn"></span></b><br />
+          <b>Direccion: <span id="direccion"></span></b><br />
+          <b>Telefono: <span id="telefono"></span></b><br />
+          <b id="email"></b><br />
+        </div>
+      </div>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div id="tipodoc" class="divider"></div>
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table>
+        <tr>
+          <td class="informasi">Factura:</td>
+          <td class="informasi" id="factura"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Fecha:</td>
+          <td class="informasi" id="date"></td>
+        </tr>
+        <tr>
+          <td class="informasi">CAI:</td>
+          <td class="informasi" id="cai"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Rango:</td>
+          <td class="informasi" id="rango"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Limite:</td>
+          <td class="informasi" id="limite"></td>
+        </tr>
+      </table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div class="divider">Datos del cliente</div>
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table>
+        <tr>
+          <td class="informasi">Cliente:</td>
+          <td class="informasi" id="cliente"></td>
+        </tr>
+        <tr>
+          <td class="informasi">RTN:</td>
+          <td class="informasi" id="rtncliente"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Direccion:</td>
+          <td class="informasi" id="direccioncliente"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Telefono:</td>
+          <td class="informasi" id="telefonocliente"></td>
+        </tr>
+      </table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div class="divider">Condiciones de pago</div>
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table>
+        <tr>
+          <td class="informasi">Forma de pago:</td>
+          <td class="informasi" id="formapago"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Plazo en días:</td>
+          <td class="informasi" id="plazo"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Cantidad de pagos:</td>
+          <td class="informasi" id="pagos"></td>
+        </tr>
+        <tr>
+          <td class="informasi">Cuota por pago:</td>
+          <td class="informasi">L<span id="cuota"></span></td>
+        </tr>
+      </table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div class="divider">Datos del cliente exonerado</div>
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table>
+        <tr>
+          <td class="informasi">O. C. Exenta:</td>
+          <td class="informasi" id="ocexe"></td>
+        </tr>
+        <tr>
+          <td class="informasi">O. C. Exonerada:</td>
+          <td class="informasi" id="ocexo"></td>
+        </tr>
+        <tr>
+          <td class="informasi">No. Reg. SAG:</td>
+          <td class="informasi" id="nosag"></td>
+        </tr>
+      </table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div class="divider">Detalle</div>
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table>
+        <tr class="listitem">
+          <td><h2>Cant</h2></td>
+          <td><h2>Precio</h2></td>
+          <td><h2>Desc.</h2></td>
+          <td><h2>Isv</h2></td>
+          <td><h2>Monto</h2></td>
+        </tr>
+      </table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table id="productTable"></table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <table>
+        <tr>
+          <td class="detail">Subtotal</td>
+          <td class="detail1">L<span id="subtotal"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Descuento</td>
+          <td class="detail1">L<span id="descuento"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Subtotal exento:</td>
+          <td class="detail1">L<span id="subtotalexe"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Subtotal exonerado:</td>
+          <td class="detail1">L<span id="subtotalexo"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Subtotal 15%:</td>
+          <td class="detail1">L<span id="subtotalisv15"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Subtotal 18%:</td>
+          <td class="detail1">L<span id="subtotalisv18"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Impuesto 15%:</td>
+          <td class="detail1">L<span id="isv15"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Impuesto 18%:</td>
+          <td class="detail1">L<span id="isv18"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Total venta:</td>
+          <td class="detail1">L<span id="total"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Recibido:</td>
+          <td class="detail1">L<span id="recibido"></span></td>
+        </tr>
+        <tr>
+          <td class="detail">Cambio:</td>
+          <td class="detail1">L<span id="cambio"></span></td>
+        </tr>
+      </table>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <div id="montoLetras"></div>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div class="divider">Gracias por su preferencia!!</div>
+      <div class="divider">Original: Cliente, Copia: Emisor</div>
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+
+      <div style="text-align: center">
+        <img alt="Barcode Generator TEC-IT" id="barcode" />
+      </div>
+
+      <div class="divider">
+        ------------------------------------------------
+      </div>
+      <div
+        style="
+          padding-top: 8px;
+          text-align: center;
+          font-size: 15px;
+          font-family: Source Sans Pro, Arial, sans-serif;
+        "
+      >
+        <span>www.rmposhn.com</span><br />
+        <span>indime.hn@gmail.com</span><br />
+        <span>(+504) 9359-3126</span>
+      </div>
+    </div>
+
+    <script>
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      function setElementText(id, value) {
+        document.getElementById(id).textContent = value;
+      }
+
+      function populateTable(products) {
+        const table = document.getElementById("productTable");
+        products.forEach((product) => {
+          const row1 = table.insertRow();
+          const cell1 = row1.insertCell(0);
+          cell1.colSpan = 5;
+          cell1.className = "descriptions";
+          cell1.textContent = product.description;
+
+          const row2 = table.insertRow();
+          row2.className = "listitem";
+          ["quantity", "price", "desc", "isv", "amount"].forEach(
+            (key, index) => {
+              const cell = row2.insertCell(index);
+              cell.className = key === "isv" || key === "amount" ? "Isv" : key;
+              cell.textContent = product[key];
+            }
+          );
+        });
+      }
+
+      function numeroALetras(numero) {
+        // This is a simplified version. For a complete implementation, you'd need a more complex function.
+        const unidades = [
+          "",
+          "UN ",
+          "DOS ",
+          "TRES ",
+          "CUATRO ",
+          "CINCO ",
+          "SEIS ",
+          "SIETE ",
+          "OCHO ",
+          "NUEVE ",
+        ];
+        const decenas = [
+          "DIEZ ",
+          "VEINTE ",
+          "TREINTA ",
+          "CUARENTA ",
+          "CINCUENTA ",
+          "SESENTA ",
+          "SETENTA ",
+          "OCHENTA ",
+          "NOVENTA ",
+        ];
+        const centenas = [
+          "CIENTO ",
+          "DOSCIENTOS ",
+          "TRESCIENTOS ",
+          "CUATROCIENTOS ",
+          "QUINIENTOS ",
+          "SEISCIENTOS ",
+          "SETECIENTOS ",
+          "OCHOCIENTOS ",
+          "NOVECIENTOS ",
+        ];
+
+        if (numero < 10) return unidades[numero];
+        if (numero < 20) return "DIECI" + unidades[numero - 10];
+        if (numero < 100)
+          return decenas[Math.floor(numero / 10) - 1] + unidades[numero % 10];
+        if (numero < 1000)
+          return (
+            centenas[Math.floor(numero / 100) - 1] + numeroALetras(numero % 100)
+          );
+        return "NUMERO FUERA DE RANGO";
+      }
+
+      window.onload = function () {
+        // Populate fields
+        [
+          "empresa",
+          "razon",
+          "rtn",
+          "direccion",
+          "telefono",
+          "email",
+          "tipodoc",
+          "factura",
+          "date",
+          "cai",
+          "rango",
+          "limite",
+          "cliente",
+          "rtncliente",
+          "direccioncliente",
+          "telefonocliente",
+          "formapago",
+          "plazo",
+          "pagos",
+          "cuota",
+          "ocexe",
+          "ocexo",
+          "nosag",
+          "subtotal",
+          "descuento",
+          "subtotalexe",
+          "subtotalexo",
+          "subtotalisv15",
+          "subtotalisv18",
+          "isv15",
+          "isv18",
+          "total",
+          "recibido",
+          "cambio",
+        ].forEach((id) => {
+          setElementText(id, getQueryParam(id));
+        });
+
+        // Populate products table
+        const descriptions = getQueryParam("descriptions").split(",");
+        const quantitys = getQueryParam("quantitys").split(",");
+        const price = getQueryParam("price").split(",");
+        const descproducto = getQueryParam("descproducto").split(",");
+        const isvproducto = getQueryParam("isvproducto").split(",");
+        const amounts = getQueryParam("amounts").split(",");
+
+        const products = descriptions.map((description, index) => ({
+          description,
+          quantity: quantitys[index],
+          price: price[index],
+          desc: descproducto[index],
+          isv: isvproducto[index],
+          amount: amounts[index],
+        }));
+
+        populateTable(products);
+
+        // Set barcode
+        document.getElementById(
+          "barcode"
+        ).src = `https://barcode.tec-it.com/barcode.ashx?data=${getQueryParam(
+          "Folio_1"
+        )}`;
+
+        // Set monto en letras
+        const total = parseFloat(getQueryParam("total"));
+        document.getElementById(
+          "montoLetras"
+        ).textContent = `SON ${numeroALetras(
+          Math.abs(Math.floor(total))
+        )} LEMPIRAS`;
+
+        // Print the receipt
+        window.print();
+      };
+    </script>
+  </body>
+</html>
