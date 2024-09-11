@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thermal POS Receipt</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
       #thermal-pos {
-        box-shadow: 0 0 0 #eee;
-        margin: 0;
+        box-shadow: 0 0 0mm #eee;
+        margin: 0mm;
         max-width: 80mm;
         line-height: 4mm;
       }
+
       #thermal-pos h2 {
         font-size: 4mm;
         line-height: 13px;
       }
+
       #thermal-pos .label {
         text-align: center;
         font-size: 5mm;
@@ -31,32 +28,50 @@
         max-width: 45mm;
         word-wrap: break-word;
       }
+
       #thermal-pos .listitem {
         font-size: 4mm;
-        height: 0;
+        height: 0mm;
         text-align: center;
       }
       #thermal-pos table {
         width: 100%;
       }
+
       #thermal-pos .item {
         max-width: 80mm;
         font-size: 4.2mm;
         word-wrap: break-word;
         width: 100%;
       }
-      #thermal-pos .amount,
-      #thermal-pos .price,
-      #thermal-pos .desc,
-      #thermal-pos .qty,
-      #thermal-pos .Isv {
+      #thermal-pos .amount {
+        vertical-align: center;
+        text-align: right;
+        font-size: 4.2mm;
+      }
+
+      #thermal-pos .price {
         vertical-align: center;
         text-align: center;
         font-size: 4.2mm;
       }
-      #thermal-pos .Isv,
-      #thermal-pos .amount {
+
+      #thermal-pos .desc {
+        vertical-align: center;
+        text-align: center;
+        font-size: 4.2mm;
+      }
+
+      #thermal-pos .qty {
+        vertical-align: center;
+        text-align: center;
+        font-size: 4.2mm;
+      }
+
+      #thermal-pos .Isv {
+        vertical-align: center;
         text-align: right;
+        font-size: 4.2mm;
       }
       #thermal-pos .bawah {
         margin-top: 5mm;
@@ -69,41 +84,50 @@
         text-align: right;
         page-break-after: auto;
       }
+
       #thermal-pos .detail {
         margin-top: 5mm;
         text-align: left;
         page-break-after: auto;
       }
+
+      #all {
+        font-family: Arial, sans-serif;
+      }
+
       .mi-imagen {
         width: 150px;
         height: 150px;
       }
-      .divider {
-        text-align: center;
-      }
     </style>
   </head>
-  <body>
+  <body id="all">
     <div id="thermal-pos">
       <div class="label">
         <img src="logo.jpg" alt="Mi imagen" class="mi-imagen" /><br />
         <b id="empresa"></b><br />
         <b id="razon"></b>
         <div class="label">
-          <b>RTN: <span id="rtn"></span></b><br />
-          <b>Direccion: <span id="direccion"></span></b><br />
-          <b>Telefono: <span id="telefono"></span></b><br />
-          <b id="email"></b><br />
+          <b>RTN: <span id="rtn"></span></b>
+          <br />
+        </div>
+        <div class="label">
+          <b>Direccion: <span id="direccion"></span></b>
+          <br />
+        </div>
+        <div class="label">
+          <b>Telefono: <span id="telefono"></span></b>
+          <br />
+        </div>
+        <div class="label">
+          <b id="email"></b>
+          <br />
         </div>
       </div>
 
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-      <div id="tipodoc" class="divider"></div>
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <div align="center">------------------------------------------------</div>
+      <div align="center" id="tipodoc"></div>
+      <div align="center">------------------------------------------------</div>
 
       <table>
         <tr>
@@ -127,15 +151,9 @@
           <td class="informasi" id="limite"></td>
         </tr>
       </table>
-
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-      <div class="divider">Datos del cliente</div>
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-
+      <div align="center">------------------------------------------------</div>
+      <div align="center">Datos del cliente</div>
+      <div align="center">------------------------------------------------</div>
       <table>
         <tr>
           <td class="informasi">Cliente:</td>
@@ -154,15 +172,9 @@
           <td class="informasi" id="telefonocliente"></td>
         </tr>
       </table>
-
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-      <div class="divider">Condiciones de pago</div>
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-
+      <div align="center">------------------------------------------------</div>
+      <div align="center">Condiciones de pago</div>
+      <div align="center">------------------------------------------------</div>
       <table>
         <tr>
           <td class="informasi">Forma de pago:</td>
@@ -173,7 +185,7 @@
           <td class="informasi" id="plazo"></td>
         </tr>
         <tr>
-          <td class="informasi">Cantidad de pagos:</td>
+          <td class="informasi">Cantida de pagos:</td>
           <td class="informasi" id="pagos"></td>
         </tr>
         <tr>
@@ -181,14 +193,9 @@
           <td class="informasi">L<span id="cuota"></span></td>
         </tr>
       </table>
-
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-      <div class="divider">Datos del cliente exonerado</div>
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <div align="center">------------------------------------------------</div>
+      <div align="center">Datos del cliente exonerado</div>
+      <div align="center">------------------------------------------------</div>
 
       <table>
         <tr>
@@ -204,35 +211,36 @@
           <td class="informasi" id="nosag"></td>
         </tr>
       </table>
-
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-      <div class="divider">Detalle</div>
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <div align="center">------------------------------------------------</div>
+      <div align="center">Detalle</div>
+      <div align="center">------------------------------------------------</div>
 
       <table>
         <tr class="listitem">
-          <td><h2>Cant</h2></td>
-          <td><h2>Precio</h2></td>
-          <td><h2>Desc.</h2></td>
-          <td><h2>Isv</h2></td>
-          <td><h2>Monto</h2></td>
+          <td>
+            <h2>Cant</h2>
+          </td>
+          <td>
+            <h2>Precio</h2>
+          </td>
+          <td>
+            <h2>Desc.</h2>
+          </td>
+          <td>
+            <h2>Isv</h2>
+          </td>
+          <td>
+            <h2>Monto</h2>
+          </td>
         </tr>
       </table>
+      <div align="center">------------------------------------------------</div>
 
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <table id="productTable">
+        <!-- Product rows will be inserted here -->
+      </table>
 
-      <table id="productTable"></table>
-
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-
+      <div align="center">------------------------------------------------</div>
       <table>
         <tr>
           <td class="detail">Subtotal</td>
@@ -280,28 +288,19 @@
         </tr>
       </table>
 
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <div align="center">------------------------------------------------</div>
 
       <div id="montoLetras"></div>
 
-      <div class="divider">
-        ------------------------------------------------
-      </div>
-      <div class="divider">Gracias por su preferencia!!</div>
-      <div class="divider">Original: Cliente, Copia: Emisor</div>
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <div align="center">------------------------------------------------</div>
+      <div align="center">Gracias por su preferencia!!</div>
+      <div align="center">Original: Cliente, Copia: Emisor</div>
+      <div align="center">------------------------------------------------</div>
 
       <div style="text-align: center">
         <img alt="Barcode Generator TEC-IT" id="barcode" />
       </div>
-
-      <div class="divider">
-        ------------------------------------------------
-      </div>
+      <div align="center">------------------------------------------------</div>
       <div
         style="
           padding-top: 8px;
@@ -317,160 +316,285 @@
     </div>
 
     <script>
-      function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
+      // Function to get URL parameters
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
 
-      function setElementText(id, value) {
+      // Function to set text content of an element
+      function setTextContent(id, value) {
         document.getElementById(id).textContent = value;
       }
 
-      function populateTable(products) {
-        const table = document.getElementById("productTable");
-        products.forEach((product) => {
-          const row1 = table.insertRow();
-          const cell1 = row1.insertCell(0);
-          cell1.colSpan = 5;
-          cell1.className = "descriptions";
-          cell1.textContent = product.description;
+      // Populate the receipt with data from URL parameters
+      setTextContent("empresa", getUrlParameter("empresa"));
+      setTextContent("razon", getUrlParameter("razon"));
+      setTextContent("rtn", getUrlParameter("rtn"));
+      setTextContent("direccion", getUrlParameter("direccion"));
+      setTextContent("telefono", getUrlParameter("telefono"));
+      setTextContent("email", getUrlParameter("email"));
+      setTextContent("tipodoc", getUrlParameter("tipodoc"));
+      setTextContent("factura", getUrlParameter("factura"));
+      setTextContent("date", getUrlParameter("date"));
+      setTextContent("cai", getUrlParameter("cai"));
+      setTextContent("rango", getUrlParameter("rango"));
+      setTextContent("limite", getUrlParameter("limite"));
+      setTextContent("cliente", getUrlParameter("cliente"));
+      setTextContent("rtncliente", getUrlParameter("rtncliente"));
+      setTextContent("direccioncliente", getUrlParameter("direccioncliente"));
+      setTextContent("telefonocliente", getUrlParameter("telefonocliente"));
+      setTextContent("formapago", getUrlParameter("formapago"));
+      setTextContent("plazo", getUrlParameter("plazo"));
+      setTextContent("pagos", getUrlParameter("pagos"));
+      setTextContent("cuota", getUrlParameter("cuota"));
+      setTextContent("ocexe", getUrlParameter("ocexe"));
+      setTextContent("ocexo", getUrlParameter("ocexo"));
+      setTextContent("nosag", getUrlParameter("nosag"));
+      setTextContent("subtotal", getUrlParameter("subtotal"));
+      setTextContent("descuento", getUrlParameter("descuento"));
+      setTextContent("subtotalexe", getUrlParameter("subtotalexe"));
+      setTextContent("subtotalexo", getUrlParameter("subtotalexo"));
+      setTextContent("subtotalisv15", getUrlParameter("subtotalisv15"));
+      setTextContent("subtotalisv18", getUrlParameter("subtotalisv18"));
+      setTextContent("isv15", getUrlParameter("isv15"));
+      setTextContent("isv18", getUrlParameter("isv18"));
+      setTextContent("total", getUrlParameter("total"));
+      setTextContent("recibido", getUrlParameter("recibido"));
+      setTextContent("cambio", getUrlParameter("cambio"));
 
-          const row2 = table.insertRow();
-          row2.className = "listitem";
-          ["quantity", "price", "desc", "isv", "amount"].forEach(
-            (key, index) => {
-              const cell = row2.insertCell(index);
-              cell.className = key === "isv" || key === "amount" ? "Isv" : key;
-              cell.textContent = product[key];
-            }
-          );
-        });
+      // Populate product table
+      var descriptions = getUrlParameter("descriptions").split(",");
+      var quantitys = getUrlParameter("quantitys").split(",");
+      var prices = getUrlParameter("price").split(",");
+      var descproductos = getUrlParameter("descproducto").split(",");
+      var isvproductos = getUrlParameter("isvproducto").split(",");
+      var amounts = getUrlParameter("amounts").split(",");
+
+      var productTable = document.getElementById("productTable");
+      for (var i = 0; i < descriptions.length; i++) {
+        var row = productTable.insertRow();
+        row.innerHTML = `
+                <td colspan="5" class="descriptions">${descriptions[i]}</td>
+                </tr>
+                <tr class="listitem">
+                <td class="qty">${quantitys[i]}</td>
+                <td class="Price">${prices[i]}</td>
+                <td class="Desc">${descproductos[i]}</td>
+                <td class="Isv">${isvproductos[i]}</td>
+                <td class="Amount">${amounts[i]}</td>
+            `;
       }
 
+      document.getElementById("barcode").src =
+        "https://barcode.tec-it.com/barcode.ashx?data=" +
+        getUrlParameter("Folio_1");
+
+      // Function to convert number to words (Spanish)
       function numeroALetras(numero) {
-        // This is a simplified version. For a complete implementation, you'd need a more complex function.
-        const unidades = [
-          "",
-          "UN ",
-          "DOS ",
-          "TRES ",
-          "CUATRO ",
-          "CINCO ",
-          "SEIS ",
-          "SIETE ",
-          "OCHO ",
-          "NUEVE ",
-        ];
-        const decenas = [
-          "DIEZ ",
-          "VEINTE ",
-          "TREINTA ",
-          "CUARENTA ",
-          "CINCUENTA ",
-          "SESENTA ",
-          "SETENTA ",
-          "OCHENTA ",
-          "NOVENTA ",
-        ];
-        const centenas = [
-          "CIENTO ",
-          "DOSCIENTOS ",
-          "TRESCIENTOS ",
-          "CUATROCIENTOS ",
-          "QUINIENTOS ",
-          "SEISCIENTOS ",
-          "SETECIENTOS ",
-          "OCHOCIENTOS ",
-          "NOVECIENTOS ",
-        ];
+        function Unidades(num) {
+          switch (num) {
+            case 1:
+              return "UN";
+            case 2:
+              return "DOS";
+            case 3:
+              return "TRES";
+            case 4:
+              return "CUATRO";
+            case 5:
+              return "CINCO";
+            case 6:
+              return "SEIS";
+            case 7:
+              return "SIETE";
+            case 8:
+              return "OCHO";
+            case 9:
+              return "NUEVE";
+          }
+          return "";
+        }
 
-        if (numero < 10) return unidades[numero];
-        if (numero < 20) return "DIECI" + unidades[numero - 10];
-        if (numero < 100)
-          return decenas[Math.floor(numero / 10) - 1] + unidades[numero % 10];
-        if (numero < 1000)
-          return (
-            centenas[Math.floor(numero / 100) - 1] + numeroALetras(numero % 100)
+        function Decenas(num) {
+          let decena = Math.floor(num / 10);
+          let unidad = num - decena * 10;
+
+          switch (decena) {
+            case 1:
+              switch (unidad) {
+                case 0:
+                  return "DIEZ";
+                case 1:
+                  return "ONCE";
+                case 2:
+                  return "DOCE";
+                case 3:
+                  return "TRECE";
+                case 4:
+                  return "CATORCE";
+                case 5:
+                  return "QUINCE";
+                default:
+                  return "DIECI" + Unidades(unidad);
+              }
+            case 2:
+              switch (unidad) {
+                case 0:
+                  return "VEINTE";
+                default:
+                  return "VEINTI" + Unidades(unidad);
+              }
+            case 3:
+              return "TREINTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 4:
+              return "CUARENTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 5:
+              return "CINCUENTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 6:
+              return "SESENTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 7:
+              return "SETENTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 8:
+              return "OCHENTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 9:
+              return "NOVENTA" + (unidad > 0 ? " Y " + Unidades(unidad) : "");
+            case 0:
+              return Unidades(unidad);
+          }
+        }
+
+        function Centenas(num) {
+          let centenas = Math.floor(num / 100);
+          let decenas = num - centenas * 100;
+
+          switch (centenas) {
+            case 1:
+              if (decenas > 0) return "CIENTO " + Decenas(decenas);
+              return "CIEN";
+            case 2:
+              return "DOSCIENTOS " + Decenas(decenas);
+            case 3:
+              return "TRESCIENTOS " + Decenas(decenas);
+            case 4:
+              return "CUATROCIENTOS " + Decenas(decenas);
+            case 5:
+              return "QUINIENTOS " + Decenas(decenas);
+            case 6:
+              return "SEISCIENTOS " + Decenas(decenas);
+            case 7:
+              return "SETECIENTOS " + Decenas(decenas);
+            case 8:
+              return "OCHOCIENTOS " + Decenas(decenas);
+            case 9:
+              return "NOVECIENTOS " + Decenas(decenas);
+          }
+
+          return Decenas(decenas);
+        }
+
+        function Seccion(num, divisor, strSingular, strPlural) {
+          let cientos = Math.floor(num / divisor);
+          let resto = num - cientos * divisor;
+
+          let letras = "";
+
+          if (cientos > 0)
+            if (cientos > 1) letras = Centenas(cientos) + " " + strPlural;
+            else letras = strSingular;
+
+          if (resto > 0) letras += "";
+
+          return letras;
+        }
+
+        function Miles(num) {
+          let divisor = 1000;
+          let cientos = Math.floor(num / divisor);
+          let resto = num - cientos * divisor;
+
+          let strMiles = Seccion(num, divisor, "UN MIL", "MIL");
+          let strCentenas = Centenas(resto);
+
+          if (strMiles == "") return strCentenas;
+
+          return strMiles + " " + strCentenas;
+        }
+
+        function Millones(num) {
+          let divisor = 1000000;
+          let cientos = Math.floor(num / divisor);
+          let resto = num - cientos * divisor;
+
+          let strMillones = Seccion(
+            num,
+            divisor,
+            "UN MILLON DE",
+            "MILLONES DE"
           );
-        return "NUMERO FUERA DE RANGO";
+          let strMiles = Miles(resto);
+
+          if (strMillones == "") return strMiles;
+
+          return strMillones + " " + strMiles;
+        }
+
+        function NumeroALetras(num) {
+          let data = {
+            numero: num,
+            enteros: Math.floor(num),
+            centavos: Math.round(num * 100) - Math.floor(num) * 100,
+            letrasCentavos: "",
+            letrasMonedaPlural: "LEMPIRAS",
+            letrasMonedaSingular: "LEMPIRA",
+          };
+
+          if (data.centavos > 0) {
+            data.letrasCentavos =
+              "CON " +
+              (function () {
+                if (data.centavos == 1)
+                  return Millones(data.centavos) + " CENTAVO";
+                else return Millones(data.centavos) + " CENTAVOS";
+              })();
+          }
+
+          if (data.enteros == 0)
+            return (
+              "CERO " + data.letrasMonedaPlural + " " + data.letrasCentavos
+            );
+          if (data.enteros == 1)
+            return (
+              Millones(data.enteros) +
+              " " +
+              data.letrasMonedaSingular +
+              " " +
+              data.letrasCentavos
+            );
+          else
+            return (
+              Millones(data.enteros) +
+              " " +
+              data.letrasMonedaPlural +
+              " " +
+              data.letrasCentavos
+            );
+        }
+
+        return NumeroALetras(numero);
       }
 
+      // Set monto en letras
+      var total = parseFloat(getUrlParameter("total"));
+      document.getElementById("montoLetras").textContent =
+        "SON " + numeroALetras(total) + " LEMPIRAS";
+
+      // Trigger print when the page loads
       window.onload = function () {
-        // Populate fields
-        [
-          "empresa",
-          "razon",
-          "rtn",
-          "direccion",
-          "telefono",
-          "email",
-          "tipodoc",
-          "factura",
-          "date",
-          "cai",
-          "rango",
-          "limite",
-          "cliente",
-          "rtncliente",
-          "direccioncliente",
-          "telefonocliente",
-          "formapago",
-          "plazo",
-          "pagos",
-          "cuota",
-          "ocexe",
-          "ocexo",
-          "nosag",
-          "subtotal",
-          "descuento",
-          "subtotalexe",
-          "subtotalexo",
-          "subtotalisv15",
-          "subtotalisv18",
-          "isv15",
-          "isv18",
-          "total",
-          "recibido",
-          "cambio",
-        ].forEach((id) => {
-          setElementText(id, getQueryParam(id));
-        });
-
-        // Populate products table
-        const descriptions = getQueryParam("descriptions").split(",");
-        const quantitys = getQueryParam("quantitys").split(",");
-        const price = getQueryParam("price").split(",");
-        const descproducto = getQueryParam("descproducto").split(",");
-        const isvproducto = getQueryParam("isvproducto").split(",");
-        const amounts = getQueryParam("amounts").split(",");
-
-        const products = descriptions.map((description, index) => ({
-          description,
-          quantity: quantitys[index],
-          price: price[index],
-          desc: descproducto[index],
-          isv: isvproducto[index],
-          amount: amounts[index],
-        }));
-
-        populateTable(products);
-
-        // Set barcode
-        document.getElementById(
-          "barcode"
-        ).src = `https://barcode.tec-it.com/barcode.ashx?data=${getQueryParam(
-          "Folio_1"
-        )}`;
-
-        // Set monto en letras
-        const total = parseFloat(getQueryParam("total"));
-        document.getElementById(
-          "montoLetras"
-        ).textContent = `SON ${numeroALetras(
-          Math.abs(Math.floor(total))
-        )} LEMPIRAS`;
-
-        // Print the receipt
         window.print();
       };
     </script>
