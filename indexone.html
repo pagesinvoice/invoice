@@ -101,7 +101,7 @@
       <table style="width: 100%">
         <tr>
           <th colspan="4" style="width: 10%">
-            <img src="https://github.com/pagesinvoice/invoice/blob/main/logoindex.jpeg?raw=true" alt="Mi imagen" class="mi-imagen" />
+            <img src="/js/logoindex.jpeg" alt="Mi imagen" class="mi-imagen" />
           </th>
           <th colspan="4" style="width: 40%; text-align: left">
             <b style="font-size: 50px" id="empresa"></b><br />
@@ -272,7 +272,7 @@
               text-align: center;
             "
           >
-            MONTO EN LETRAS: <span id="montoLetras"></span> LEMPIRAS
+            MONTO EN LETRAS: <span id="montoLetras"></span>
           </td>
         </tr>
         <tr>
@@ -423,8 +423,6 @@
           "SIETE ",
           "OCHO ",
           "NUEVE ",
-        ];
-        var teens = [
           "DIEZ ",
           "ONCE ",
           "DOCE ",
@@ -439,7 +437,7 @@
         var tens = [
           "",
           "",
-          "VEINTI",
+          "VEINTE ",
           "TREINTA ",
           "CUARENTA ",
           "CINCUENTA ",
@@ -448,9 +446,21 @@
           "OCHENTA ",
           "NOVENTA ",
         ];
+        var hundreds = [
+          "",
+          "CIENTO ",
+          "DOSCIENTOS ",
+          "TRESCIENTOS ",
+          "CUATROCIENTOS ",
+          "QUINIENTOS ",
+          "SEISCIENTOS ",
+          "SETECIENTOS ",
+          "OCHOCIENTOS ",
+          "NOVECIENTOS ",
+        ];
         var scales = ["", "MIL ", "MILLON ", "MIL MILLONES ", "BILLON "];
 
-        if (number === 0) return "CERO";
+        if (number === 0) return "CERO LEMPIRAS";
 
         var words = "";
         var scaleIndex = 0;
@@ -465,13 +475,17 @@
           scaleIndex++;
         }
 
-        return words.trim();
+        return words.trim() + " LEMPIRAS";
 
         function numberToWordsLessThanThousand(n) {
           var words = "";
 
           if (n >= 100) {
-            words += units[Math.floor(n / 100)] + "CIENTO ";
+            if (n === 100) {
+              words += "CIEN ";
+            } else {
+              words += hundreds[Math.floor(n / 100)];
+            }
             n %= 100;
           }
 
@@ -480,9 +494,7 @@
             if (n % 10 !== 0) {
               words += "Y " + units[n % 10];
             }
-          } else if (n >= 10) {
-            words += teens[n - 10];
-          } else {
+          } else if (n >= 1) {
             words += units[n];
           }
 
