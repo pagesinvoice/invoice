@@ -36,6 +36,7 @@
       }
       #thermal-pos table {
         width: 100%;
+        table-layout: fixed;
       }
 
       #thermal-pos .item {
@@ -99,12 +100,45 @@
         width: 150px;
         height: 150px;
       }
+
+      #thermal-pos .listitem td {
+        width: 20%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      #thermal-pos .descriptions {
+        width: 100%;
+        text-align: left;
+        font-weight: bold;
+        padding-top: 1px;
+        padding-bottom: 1px;
+      }
+
+      /* Alineación específica para cada columna */
+      #thermal-pos .listitem .qty {
+        width: 15%;
+        text-align: left;
+      }
+
+      #thermal-pos .listitem .Price,
+      #thermal-pos .listitem .Desc,
+      #thermal-pos .listitem .Isv {
+        width: 20%;
+        text-align: center;
+      }
+
+      #thermal-pos .listitem .Amount {
+        width: 25%;
+        text-align: right;
+      }
     </style>
   </head>
   <body id="all">
     <div id="thermal-pos">
       <div class="label">
-        <img src="https://github.com/pagesinvoice/invoice/blob/main/logoindex.jpeg?raw=true" alt="Mi imagen" class="mi-imagen" /><br />
+        <img src="/js/logoindex.jpeg" alt="Mi imagen" class="mi-imagen" /><br />
         <b id="empresa"></b><br />
         <b id="razon"></b>
         <div class="label">
@@ -377,17 +411,24 @@
 
       var productTable = document.getElementById("productTable");
       for (var i = 0; i < descriptions.length; i++) {
-        var row = productTable.insertRow();
-        row.innerHTML = `
-                <td colspan="5" class="descriptions">${descriptions[i]}</td>
-                </tr>
-                <tr class="listitem">
-                <td class="qty">${quantitys[i]}</td>
-                <td class="Price">${prices[i]}</td>
-                <td class="Desc">${descproductos[i]}</td>
-                <td class="Isv">${isvproductos[i]}</td>
-                <td class="Amount">${amounts[i]}</td>
-            `;
+        // Create a new row for the description
+        var descriptionRow = productTable.insertRow();
+        descriptionRow.innerHTML = `
+        <td colspan="5" class="descriptions">${descriptions[i]}</td>
+    `;
+
+        // Create a new row for the other details
+        var detailsRow = productTable.insertRow();
+        detailsRow.innerHTML = `
+        <td class="qty">${quantitys[i]}</td>
+        <td class="Price">${prices[i]}</td>
+        <td class="Desc">${descproductos[i]}</td>
+        <td class="Isv">${isvproductos[i]}</td>
+        <td class="Amount">${amounts[i]}</td>
+    `;
+
+        // Add a class to the details row for styling
+        detailsRow.className = "listitem";
       }
 
       document.getElementById("barcode").src =
